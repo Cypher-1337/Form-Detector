@@ -150,9 +150,9 @@ func main() {
 				for _, input := range info.Inputs {
 					fmt.Println(cyan("Input:"), input)
 				}
-				fmt.Printf("\n\n____________________________________________________\n\n")
 
 			}
+			fmt.Printf("\n\n____________________________________________________\n\n")
 		}
 	}
 
