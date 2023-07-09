@@ -2,7 +2,11 @@
 A tool to detect forms in multiple urls
 
 # Installation
-``` go install github.com/Cypher-1337/Form-Detector@latest ```
+``` 
+go install github.com/Cypher-1337/Form-Detector@latest
+```
 
 # Usage 
-``` Form-Detector -f urls.txt ```
+```
+Form-Detector -f urls.txt
+ ```
