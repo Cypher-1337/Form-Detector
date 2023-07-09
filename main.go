@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/fatih/color" // Import the color package
 	"golang.org/x/net/html"
@@ -20,7 +21,10 @@ type FormInfo struct {
 
 func getForm(url string) []FormInfo {
 	// Get the response from the URL
-	resp, err := http.Get(url)
+	var client = &http.Client{
+		Timeout: 10 * time.Second,
+	}
+	resp, err := client.Get(url)
 	if err != nil {
 		fmt.Println("Error getting", url, err)
 		return nil
@@ -132,6 +136,8 @@ func main() {
 		if len(infos) > 0 {
 			// Print the url with green color
 			fmt.Println(green(url))
+			fmt.Println()
+
 			// Print the number of forms found
 			fmt.Println("Found", len(infos), "forms in this page.")
 			// Loop through the infos slice and print the form information
@@ -139,10 +145,14 @@ func main() {
 				// Check if there is only one form and print accordingly
 				if len(infos) == 1 {
 					// Print form instead of form1 with yellow color
+					fmt.Println()
 					fmt.Println(yellow("Form:"))
+
 				} else {
 					// Print the form index with yellow color
+					fmt.Println()
 					fmt.Println(yellow("Form", i+1, ":"))
+
 				}
 				// Print the form method with yellow color
 				fmt.Println(yellow("Method:"), info.Method)
@@ -152,8 +162,8 @@ func main() {
 				}
 
 			}
-			fmt.Printf("\n\n____________________________________________________\n\n")
 		}
+		fmt.Printf("\n\n____________________________________________________\n\n")
 	}
 
 	// Check for any scanning errors
